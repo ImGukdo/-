@@ -1,0 +1,60 @@
+{% include 'header.html' %}
+    <script>
+        function update(){
+            var form = document.createElement('form');
+            form.setAttribute('method', 'post');
+            form.setAttribute('action', '/board/update');
+            form.setAttribute('enctype', "multipart/form-data");
+
+            var check = ["loc", "title", "content", "num"];
+            for(i = 0; i < 3; ++i){
+                if(document.getElementById(check[i]).value == ""){
+                    alert("입력사항을 확인해주세요.");
+                    return;
+                }
+            }
+            var str = document.getElementById("content").value;
+            str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+            for(i = 0; i < 4; ++i){
+                var hiddenfield = document.createElement('input');
+                hiddenfield.setAttribute('name', check[i]);
+                if(i == 2){
+                    hiddenfield.setAttribute('value', str);
+                }
+                else if(i ==3){
+                    hiddenfield.setAttribute('value', {{bd.num}});
+                }
+                else{
+                    hiddenfield.setAttribute("value", document.getElementById(check[i]).value);
+                }
+                form.appendChild(hiddenfield);
+            }
+
+            document.body.appendChild(form);
+            alert("글이 수정되었습니다.");
+            form.submit();
+        }
+    </script>
+<table style="position:relative;top:10px;left:200px;">
+    <tr><td>ⓘ</td><td>고객님의 안전이 최우선!</td></tr>
+    <tr><td></td><td>코로나19에 대한 여행안내</td></tr>
+</table>
+<hr style="border:1px color= silver;" width="90%">
+<a href="/"><img src="../static/img/playdata_logo.png" style="width:150px;height:40px;position:relative;top:10px;left:200px;"></a>
+<table style="position:relative;top:-15px;left:1200px;">
+    <tr><td>{{session.id}}님&nbsp</td><td><a href="/member/logout">로그아웃</a></td></tr>
+</table>
+<table style="position:relative;top:50px;left:150px;font-size:30px;">
+    <tr><td>글 수정하기</td></tr>
+</table>
+<input type="button" value="수정" style="position:relative;top:60px;left:1270px;width:80px;height:30px;" onclick="update()">
+<hr style="border:1px color= silver;position:relative;top:60px;" width="80%">
+<input type="text" style="width:1200px;height:40px;position:relative;top:60px;left:150px;padding-left:10px;"
+               id="loc" name="loc" value="{{bd.loc}}" placeholder="여행지를 입력해 주세요.">
+<input type="text" style="width:1200px;height:40px;position:relative;top:80px;left:150px;padding-left:10px;"
+               id="title" name="title" value="{{bd.title}}" placeholder="제목을 입력해 주세요.">
+<textarea rows="15" cols="45" wrap="hard"
+style="width:1200px;height:280px;position:relative;top:100px;left:150px;padding-left:10px;padding-top:30px;resize:none;font-size:15px;"
+id="content" name="content" placeholder="내용을 입력하세요." >{{content}}</textarea><br>
+
+{% include 'footer.html' %}

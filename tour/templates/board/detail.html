@@ -1,0 +1,127 @@
+{% include 'header.html' %}
+    <script>
+        function del(url, val){
+            var flag = confirm("정말 삭제 하시겠습니까?")
+            if(flag){
+                var form = document.createElement('form');
+                form.setAttribute('method', 'post');
+                form.setAttribute('action', url);
+                var hiddenfield = document.createElement('input');
+                hiddenfield.setAttribute('name', 'num');
+                hiddenfield.setAttribute('value', val);
+                form.appendChild(hiddenfield);
+                if(url == '/board/redelete'){
+                    var hiddenfield = document.createElement('input');
+                    hiddenfield.setAttribute('name', 'bdnum');
+                    hiddenfield.setAttribute('value', {{bd.num}});
+                    form.appendChild(hiddenfield);
+                }
+                document.body.appendChild(form);
+                form.submit();
+            }
+            else{
+                alert("삭제가 취소되었습니다.")
+            }
+        }
+
+
+      function edit(url, val){
+        var form = document.createElement('form');
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', url);
+        var hiddenfield = document.createElement('input');
+        hiddenfield.setAttribute('name', 'num');
+        hiddenfield.setAttribute('value', val);
+        hiddenfield.setAttribute('type', 'hidden');
+        form.appendChild(hiddenfield);
+        if(url == '/board/reedit'){
+                var hiddenfield = document.createElement('input');
+                hiddenfield.setAttribute('name', 'bdnum');
+                hiddenfield.setAttribute('value', {{bd.num}});
+                hiddenfield.setAttribute('type', 'hidden');
+                form.appendChild(hiddenfield);
+        }
+        document.body.appendChild(form);
+        form.submit();
+      }
+
+      function insert(){
+        var form = document.createElement('form');
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', '/board/reboard');
+
+        var check = ["num", "content"];
+        if(document.getElementById(check[1]).value == ""){
+            alert("입력사항을 확인해주세요.");
+            return;
+        }
+        var str = document.getElementById("content").value;
+        str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        for(i = 0; i < 2; ++i){
+            var hiddenfield = document.createElement('input');
+            hiddenfield.setAttribute('name', check[i]);
+            if(i == 1){
+                hiddenfield.setAttribute('value', str);
+            }
+            else{
+                hiddenfield.setAttribute("value", {{bd.num}});
+            }
+            hiddenfield.setAttribute('type', "hidden");
+            form.appendChild(hiddenfield);
+        }
+        document.body.appendChild(form);
+        alert("댓글이 등록되었습니다.");
+        form.submit();
+      }
+
+    </script>
+
+<table style="position:relative;top:50px;left:150px;font-size:30px;" >
+    <tr><td>{{bd.title}}</td></tr>
+</table>
+<table style="position:relative;top:60px;left:150px;font-size:15px;" >
+    <tr><td style="width:50px;">작성자</td><td style="width:50px;">{{bd.writer}}</td><td style="width:50px;">작성일</td><td>{{bd.w_date}}</td>
+    {% if session.name == bd.writer %}
+        <td style="width:870px;"></td>
+        <td style="width:40px;"><input type="button" value="수정" style="background-color:Transparent;border:0px;cursor:pointer;" onclick="edit('/board/edit', {{bd.num}})"></td>
+        <td style="width:40px;"><input type="button" value="삭제" style="background-color:Transparent;border:0px;cursor:pointer;" onclick="del('/board/delete', {{bd.num}})"></td>
+    </tr>
+    {% endif %}
+</table>
+<hr style="border:1px color= silver;position:relative;top:60px;" width="80%">
+{% for i in content %}
+<pre style="position:relative;top:70px;left:150px;font-size:20px">{{i}}</pre>
+{% endfor %}
+<hr style="border:1px color= silver;position:relative;top:100px;" width="80%">
+<table style="position:relative;top:100px;left:150px;font-size:20px;" >
+    <tr><td>댓글</td></tr>
+</table>
+{% if rebd %}
+{% for i in rebd %}
+<table style="position:relative;top:100px;left:150px;font-size:15px;">
+    <tr><td>{{i.writer}}</td>
+    {% if i.writer == session.name %}
+        <td style="width:20px;"><input type="button" value="수정" style="background-color:Transparent;border:0px;cursor:pointer;" onclick="edit('/board/reedit', {{i.pk}})"></td>
+        <td style="width:20px;"><input type="button" value="삭제" style="background-color:Transparent;border:0px;cursor:pointer;" onclick="del('/board/redelete', {{i.pk}})"></td>
+    {% endif %}
+    </tr>
+    <tr><td><pre>{{i.content}}</pre></td></tr>
+    <tr><td>{{i.w_date}}</td></tr>
+    <tr><td style="height:10px;"></td></tr>
+</table>
+<hr style="border:1px color= silver;position:relative;top:80px;left:-400px;" width="400px">
+{% endfor %}
+{% endif %}
+{% if session.id %}
+<table style="position:relative;top:130px;left:150px;font-size:15px;">
+    <tr><td style="width:40px;"></td><td style="font-size:20px;">&nbsp&nbsp{{session.name}}
+        <input type="button" value="등록" style="background-color:Transparent;border:0px;cursor:pointer;" onclick="insert()">
+    </td></tr>
+    <tr><td></td><td><textarea rows="15" cols="5" wrap="hard"
+style="width:1150px;height:80px;padding-left:10px;padding-top:20px;resize:none;font-size:15px;"
+id="content" name="content" placeholder="댓글을 입력하세요."></textarea></td></tr>
+</table>
+{% endif %}
+<br/><br/><br/>
+
+{% include 'footer.html' %}

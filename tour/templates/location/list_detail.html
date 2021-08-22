@@ -1,0 +1,65 @@
+{% include 'header.html' %}
+<div class="detail">
+    {% for vo in detailVo %}
+    <ul class="list_detail">
+
+        <li>
+            <div class="area_txt">
+                <div class="tit">{{vo.title}}</div>
+            </div>
+        </li>
+        <li>
+            <div class="photo">
+                <img src="{{vo.firstimage}}"/>
+            </div>
+        </li>
+        <li>
+            <div class="area_addr">
+                {{vo.addr1}}
+                {% if session.id %}
+                &nbsp&nbsp&nbsp<input type="button" value="♥여행찜하기" style="background-color:Transparent;border:0px;cursor:pointer;color:red;" onclick="interest();">
+                {% endif %}
+            </div>
+
+        <li>
+            <div id="detail_homepage" class="area_addr">{{vo.homepage}}</div>
+        </li>
+        <li><div id="detail_overview" class="">{{vo.overview}}</div></li>
+        <script>
+            var homepage = '{{vo.homepage}}';
+
+            console.log(homepage);
+            //a태그 변환
+            var escapedHtml1 = homepage.replace(/&amp;/g,'&')
+                                    .replace(/&gt;/g,'>')
+                                    .replace(/&lt;/g,'<')
+                                    .replace(/&#34;/g, '"')
+                                    .replace(/&quot;/g, '"')
+                                    .replace(/&apos;/g, "'");
+            //남아있는 a태그 변환
+            var page = escapedHtml1.replace(/&lt;/,'<').replace(/&gt;/,'>');
+
+            document.getElementById('detail_homepage').innerHTML = page;
+
+            function interest(){
+                var check = "{{session.interest}}";
+                if(check == "None"){
+                    check = 0;
+                }
+                if(check != 0){
+                    var flag = confirm("찜 목록을 변경하시겠습니까?");
+                    if(flag){
+                        location.href = "/location/interest?loc={{vo.addr1}}&contentid={{vo.contentid}}";
+                    }
+                }
+                else{
+                    alert("여행지를 찜하셨습니다.");
+                    location.href = "/location/interest?loc={{vo.addr1}}&contentid={{vo.contentid}}";
+                }
+            }
+        </script>
+
+    </ul>
+    {% endfor %}
+</div>
+{% include 'footer.html' %}

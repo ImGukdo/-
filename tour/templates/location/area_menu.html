@@ -1,0 +1,28 @@
+{% include 'header.html' %}
+<center>
+<h3>지역별 관광지 검색</h3>
+<nac class="area_menu">
+    <ul>
+        {% for a in areas %}
+        <li><a href="/location/list?areaCode={{a.code}}">{{a.name}}</a></li>
+        {% endfor %}
+    </ul>
+</nac>
+
+<br/><br/>
+<div class="area_show_images">
+
+<a href="/location/list-detail?contentid={{img_1[0].contentid}}">
+    <img src="{{img_1[0].originimgurl}}" class="w3-hover-opacity" alt="">
+</a>
+<a href="/location/list-detail?contentid={{img_2[0].contentid}}">
+    <img src="{{img_2[0].originimgurl}}" class="w3-hover-opacity" alt="{{img_2[0].originimgurl}}">
+</a>
+<a href="/location/list-detail?contentid={{img_3[0].contentid}}">
+    <img src="{{img_3[0].originimgurl}}" class="w3-hover-opacity" alt="{{img_3[0].smallimageurl}}">
+</a>
+</div>
+
+
+</center>
+{% include 'footer.html' %}
