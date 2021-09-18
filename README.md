@@ -3,5 +3,10 @@
 ## 소개
 코로나로 지친 일상, 힐링을 위해 안전한 여행을 떠나보자.  
 지역별 코로나 정보를 통해 안전한 지역을 선택할 수 있도록
-여행지 정보를 제공하고 추천한다.
-   
+여행지 정보를 제공하고 추천한다.   
+### 로그인화면   
+<img src="https://user-images.githubusercontent.com/85783104/133889758-5b05b888-82c5-4841-a303-90a29b62da67.PNG" width="640px" height="320px" title="px(픽셀) 크기 설정" alt="LoginScreen"></img><br/>
+### 메인화면 상단
+<img src="https://user-images.githubusercontent.com/85783104/133889760-9ff1ba0f-a261-4f24-862b-df8e7b90c0fe.PNG" width="640px" height="320px" title="px(픽셀) 크기 설정" alt="MainScreen1"></img><br/>
+### 메인화면 하단
+<img src="https://user-images.githubusercontent.com/85783104/133889766-77d3bf23-65f4-49bf-9a03-4fd9c3671797.PNG" width="640px" height="320px" title="px(픽셀) 크기 설정" alt="MainScreen2"></img><br/>
