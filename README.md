@@ -10,3 +10,7 @@
 <img src="https://user-images.githubusercontent.com/85783104/133889760-9ff1ba0f-a261-4f24-862b-df8e7b90c0fe.PNG" width="640px" height="320px" title="px(픽셀) 크기 설정" alt="MainScreen1"></img><br/>
 ### 메인화면 하단
 <img src="https://user-images.githubusercontent.com/85783104/133889766-77d3bf23-65f4-49bf-9a03-4fd9c3671797.PNG" width="640px" height="320px" title="px(픽셀) 크기 설정" alt="MainScreen2"></img><br/>
+### 관광지 지역별 검색화면
+<img src="https://user-images.githubusercontent.com/85783104/133889767-39631915-255a-45ff-aa88-6abc5adaee67.PNG" width="640px" height="320px" title="px(픽셀) 크기 설정" alt="SearchScreen"></img><br/>
+### 관광지 상세화면
+<img src="https://user-images.githubusercontent.com/85783104/133889768-ef20b77e-cd96-4db8-b501-1cf34ce9152c.PNG" width="640px" height="320px" title="px(픽셀) 크기 설정" alt="detailScreen"></img><br/>
